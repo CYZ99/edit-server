@@ -1,0 +1,27 @@
+{
+  "name": "edit-server",
+  "version": "1.0.0",
+  "description": "edit project interface",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CYZ99/edit-server.git"
+  },
+  "author": "CYZ99",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CYZ99/edit-server/issues"
+  },
+  "homepage": "https://github.com/CYZ99/edit-server#readme",
+  "dependencies": {
+    "@koa/router": "^12.0.0",
+    "dotenv": "^16.1.4",
+    "koa": "^2.14.2",
+    "koa-bodyparser": "^4.4.0",
+    "mysql2": "^3.3.3",
+    "nodemon": "^2.0.22"
+  }
+}
