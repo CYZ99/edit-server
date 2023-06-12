@@ -4,7 +4,6 @@ class UserController {
   async create(ctx, next) {
 		// 1. 拿到用户传递过来的信息 (POST请求)
 		const user = ctx.request.body;
-
 		// 2.1 将 user 信息存储到数据中
 		const result = await userService.create(user);
 
