@@ -17,6 +17,12 @@ class UserService {
 		const [values] = await connection.execute(statement, [name]);
 		return values;
 	}
+	async findUserInfoById(id) {
+		const statement =
+			'SELECT `NAME` as `name`, NICKNAME as `nickname` FROM `users` WHERE `id` = ?;'
+		const [values] = await connection.execute(statement, [id]);
+		return values;
+	}
 }
 
 module.exports = new UserService()
