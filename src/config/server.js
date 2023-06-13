@@ -7,5 +7,6 @@ const dotenv = require('dotenv')
 dotenv.config()
 module.exports = {
   SERVER_PORT: process.env.SERVER_PORT,
-  SERVER_HOST: process.env.SERVER_HOST
+  SERVER_HOST: process.env.SERVER_HOST,
+  SMART_KEY: process.env.SMART_KEY
 }
