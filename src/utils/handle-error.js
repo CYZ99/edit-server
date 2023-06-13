@@ -1,5 +1,11 @@
 const app = require('../app')
-const { USERNAME_IS_ALREADY_EXITS, USERNAME_NOT_EXITS, PASSWORD_IS_INCORRENT, UNAUTHORIZATION } = require('../config/error-constent')
+const {
+	USERNAME_IS_ALREADY_EXITS,
+	USERNAME_NOT_EXITS,
+	PASSWORD_IS_INCORRENT,
+	UNAUTHORIZATION,
+	CREATE_QUESTION_ERROR
+} = require('../config/error-constent');
 
 app.on('error', (error, ctx) => {
   let message = ''
@@ -20,6 +26,10 @@ app.on('error', (error, ctx) => {
     case UNAUTHORIZATION:
       code = 401,
         message = '没有权限认证,请重新登录'
+      break;
+    case CREATE_QUESTION_ERROR:
+      code = -1004,
+        message = '创建问卷列表失败'
       break;
   }
   ctx.body = { message, code }
