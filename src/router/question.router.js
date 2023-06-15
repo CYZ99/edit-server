@@ -1,7 +1,8 @@
 const KoaRouter = require('@koa/router');
 const QuestionController = require('../controller/question.controller')
 const questionRouter = new KoaRouter({prefix: '/api'});
-const { verifyAuth } = require('../middleware/login.middleware')
+const { verifyAuth } = require('../middleware/login.middleware');
+
 
 // 需要验证是否登录，登录才能创建
 questionRouter.post('/question', verifyAuth,  QuestionController.create);
