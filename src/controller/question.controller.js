@@ -29,9 +29,10 @@ class QuestionController {
     // const offset = Number((page - 1) * pageSize);
     // console.log(1, offset);
     if (page && pageSize) {
+      const offset = ((page - 1) * pageSize).toString()
 			try {
 				const result = await questionService.getQuestionListService(
-					page,
+					offset,
 					pageSize
 				);
 				ctx.body = {
@@ -77,7 +78,7 @@ class QuestionController {
 			}
     }
     // 查询 假删除问卷
-    if (isDeleted) {
+    if (Number(isDeleted)) {
       try {
 				const result = await questionService.getQuestionByIsDeletedService(
 					isDeleted
@@ -126,10 +127,14 @@ class QuestionController {
   async updateQuestion(ctx, next) {
     const body = ctx.request.body
     const { id } = ctx.params
-    await questionService.updateQuestionService(id, body)
-    ctx.body = {
-      code: 0,
-      message: '更新成功',
+    try {
+      await questionService.updateQuestionService(id, body);
+      ctx.body = {
+				code: 0,
+				message: '更新成功'
+			};
+    } catch (error) {
+      console.log(error);
     }
   }
 }

@@ -12,7 +12,7 @@ questionRouter.post('/question/duplicate/:id', verifyAuth, (ctx) => {
   ctx.body = '测试复制接口'
 })
 questionRouter.delete('/question', verifyAuth,  QuestionController.deletedQuestions)
-questionRouter.patch('/question/:id', QuestionController.updateQuestion)
+questionRouter.patch('/question/:id', verifyAuth, QuestionController.updateQuestion)
 
 
 

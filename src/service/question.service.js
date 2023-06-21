@@ -27,9 +27,13 @@ class QuestionService {
 	// 分页查询
 	async getQuestionListService(offset, pageSize) {
 		const statement = 'SELECT * FROM questions LIMIT ? OFFSET ?;';
+		const statement1 = 'SELECT COUNT(*) AS total FROM `questions`;'
 		let result = [];
+		let result1 = [];
 		try {
 			[result] = await connection.execute(statement, [pageSize, offset]);
+			[result1] = await connection.execute(statement1);
+			result.push(result1[0]);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -110,7 +114,7 @@ class QuestionService {
 		const fields = Object.keys(data)
 		const placeholders = fields.map(field => `${field} = ?`).join(', ')
 		// 构建查询数组
-		const values = Object.value(data)
+		const values = Object.values(data)
 		const statement = `UPDATE questions SET ${placeholders} WHERE id = ?;`
 		try {
 			await connection.execute(statement, [...values, id])
