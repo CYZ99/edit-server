@@ -3,13 +3,13 @@ const { CREATE_QUESTION_ERROR } = require('../config/error-constent')
 
 class QuestionController {
   async create(ctx, next) {
-    const { title, isPublished, awswerCount, isStar, isDeleted } =
-      ctx.request.body;
     // 数据库语句
     let result = [];
+    const { title, desc } = ctx.request.body
     try {
-      result = await questionService.create(title, isPublished, awswerCount, isStar, isDeleted);
+      result = await questionService.create(title, 0, 0, 0, 0, desc);
     } catch (error) {
+      console.log(error);
       return ctx.app.emit('error', CREATE_QUESTION_ERROR, ctx);
     }
     // 返回结果
@@ -97,9 +97,6 @@ class QuestionController {
 
   async getQuestionById(ctx, next) {
     const id = ctx.params.id
-    const keyword = ctx.params.keyword
-    console.log(keyword);
-    console.log(id);
     try {
       const result = await questionService.getQuestionByIdService(id)
       ctx.body = {
@@ -122,6 +119,17 @@ class QuestionController {
 			};
     } catch (error) {
       console.log('controller', error);
+    }
+  }
+
+  // 更新问卷接口
+  async updateQuestion(ctx, next) {
+    const body = ctx.request.body
+    const { id } = ctx.params
+    await questionService.updateQuestionService(id, body)
+    ctx.body = {
+      code: 0,
+      message: '更新成功',
     }
   }
 }

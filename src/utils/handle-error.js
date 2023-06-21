@@ -4,7 +4,9 @@ const {
 	USERNAME_NOT_EXITS,
 	PASSWORD_IS_INCORRENT,
 	UNAUTHORIZATION,
-	CREATE_QUESTION_ERROR
+	CREATE_QUESTION_ERROR,
+  QUESTION_TITLE_ALREDY_EXITS,
+  SERVER_ERROR
 } = require('../config/error-constent');
 
 app.on('error', (error, ctx) => {
@@ -31,6 +33,13 @@ app.on('error', (error, ctx) => {
       code = -1004,
         message = '创建问卷列表失败'
       break;
+    case QUESTION_TITLE_ALREDY_EXITS:
+      code = -1005,
+        message = '问卷标题已存在'
+      break;
+    case SERVER_ERROR:
+      code = -1006,
+        message = '服务端出错了'
   }
   ctx.body = { message, code }
 })
